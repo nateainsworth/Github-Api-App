@@ -1,0 +1,1 @@
+import{_ as s,l as t,m as a,z as o,k as c}from"./entry.298ec074.js";const r={},n={class:"h-screen"},_={class:"p-4 pt-8 max-w-6xl mx-auto"};function l(e,d){return c(),t("div",n,[a("div",_,[o(e.$slots,"default")])])}const i=s(r,[["render",l]]);export{i as default};
