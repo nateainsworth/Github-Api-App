@@ -1,0 +1,1 @@
+import{_ as e,l as t,k as c}from"./entry.8afb0b4e.js";const s={},o={class:"text-3xl grow"};function r(n,_){return c(),t("h1",o,"Github Rest Api Search")}const i=e(s,[["render",r]]);export{i as default};
