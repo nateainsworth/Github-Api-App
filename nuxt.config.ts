@@ -11,6 +11,15 @@ export default defineNuxtConfig({
   },
   app: {
     baseURL: '/Github-Api-App/',
+    buildAssetsDir: 'assets',
+    head: {
+      title: 'Github Rest API',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: 'Simple website making use of github rest API in a GUI' },
+      ],
+    }
   },
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
@@ -19,4 +28,5 @@ export default defineNuxtConfig({
     injectPosition: 0,
     viewer: true,
   },
+
 })
