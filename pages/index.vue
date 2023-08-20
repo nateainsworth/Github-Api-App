@@ -1,28 +1,54 @@
 <script setup lang="ts">
 
-    const username = "nateainsworth";
-    const userUrl = ref(`https://api.github.com/users/${username}`)
-    const {data: user, pending:pendingUser, error: userError} = await useLazyFetch(userUrl.value,{
-        transform: (DataT) => DataT as GitUser,
-    });
-
-    const repoUrl = ref(`https://api.github.com/users/${username}/repos`)
-    const {data: repos, pending: pendingRepo, error: repoError} = await useLazyFetch(repoUrl.value,{
-        immediate:false,
-        watch:[user],
-        transform: (DataT) => DataT as Array<GitRepo>,
-    });
-
+    // TODO: remove for debug only
     const showRawData = ref(false);
+
+    const username = "nateainsworth";
+
+    const {data: user, pending:pendingUser, error: userError} = githubApiService.fetchUserData(username);
+
+    const {data: repos, pending: pendingRepo, error: repoError} = githubApiService.fetchUserRepos(username,user);
+    
+    const filteredRepos = ref();
+
+    const order = ref("-")
+
+    const filterCondition: Record<string, (reposValue: GitRepo[]) => GitRepo[]> = {
+        'All': (reposValue) => reposValue, // No change needed for 'All' condition
+        'Private': (reposValue) => reposValue.filter(repo => !repo.private),
+        'Public': (reposValue) => reposValue.filter(repo => repo.private),
+        'Alphabetically': (reposValue) => reposValue.slice().sort((a, b) => a.name.localeCompare(b.name)),
+        'Date Created': (reposValue) => {
+            return reposValue.slice().sort((a, b) => {
+                const dateComparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+                return order.value === "+" ? dateComparison : -dateComparison;
+            });
+        },
+        'Recently Updated': (reposValue) => {
+            return reposValue.slice().sort((a, b) => {
+                const dateComparison = new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime();
+                return order.value === "+" ? dateComparison : -dateComparison;
+            });
+        },
+    };
+
+    const filterRepos = async (key: string) => {
+        if(repos.value){
+            let repoCopy = JSON.parse(JSON.stringify(repos.value));
+            filteredRepos.value = await filterCondition[key](repoCopy);
+        }
+    }
+    
 </script>
 
 <template>
     <h1 class="text-3xl grow">Github Rest Api Search</h1>
-    <div v-if="!pendingUser && !userError">
-        <!--TODO: REMOVE later in development -->
-        <button @click="showRawData = !showRawData">{{ showRawData? "Hide Raw":"Show Raw" }}</button>
-        <pre v-if="showRawData">{{ repos }}</pre>
+   
+    <!--TODO: REMOVE later in development -->
+    <button @click="showRawData = !showRawData">{{ showRawData? "Hide Raw":"Show Raw" }}</button>
+    <pre v-if="showRawData">{{pendingRepo}}</pre>
 
+    <div v-if="!pendingUser && !userError">
         <ProfileCard 
         :name="user?.name"
         :bio="user?.bio"
@@ -30,17 +56,14 @@
         :htmlLink="user?.html_url"
         :blog="user?.blog"
         >
-            <div></div>
             <div v-if="!pendingRepo && !repoError">
-                <ElementsDropDown name="Order By" :list="['All','Private','Public','Date Created','Recently Updated']"></ElementsDropDown>
-                <div v-for="(index, key) in repos" :key="key">
+                <ElementsDropDown name="Order By" :list="Object.keys(filterCondition)" @change="filterRepos"></ElementsDropDown>
+                <div v-for="(index, key) in filteredRepos? filteredRepos : repos" :key="key">
                     <p>{{index.name}}</p>
-                </div>
-                
+                </div>   
             </div>
             <div v-else-if="repoError">Unable to Find any Repositories</div>
             <div v-else>Loading Repositories</div>
-    
         </ProfileCard>
     </div>
     <div v-else-if="userError">Unable to Find User</div>

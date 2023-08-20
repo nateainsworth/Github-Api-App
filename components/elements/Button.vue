@@ -13,9 +13,11 @@ const props = defineProps({
         default:"_self"
     },
     name:String,
+    
 })
 
-const buttonName = toRef(props.name);
+const buttonName = computed(() => props.name)
+
 </script>
 <template>
     <a :href="props.href" 

@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     nojekyll: true,
   },
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/tailwindcss','@pinia/nuxt'],
   alias:{
     assets: "/<rootDir>/assets"
   },
@@ -28,5 +28,12 @@ export default defineNuxtConfig({
     injectPosition: 0,
     viewer: true,
   },
-
+  imports: {
+    dirs: ['services'],
+  },
+  runtimeConfig: {
+    public:{
+      apiToken: process.env.GITHUB_API_TOKEN,
+    }
+  }
 })
