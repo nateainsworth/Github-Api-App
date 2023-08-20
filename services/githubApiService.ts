@@ -2,7 +2,7 @@ const config = useRuntimeConfig();
 const authToken = `bearer ${config.public.apiToken}`;
 export const githubApiService = {
 
-    fetchUserData: (username: string) => {
+    fetchUserData: (username: String) => {
         const userUrl = ref(`https://api.github.com/users/${username}`)
         // if api token add header it not don't
         if(config.public.apiToken){
@@ -20,7 +20,7 @@ export const githubApiService = {
             return {data,pending,error};
         }
     },
-    fetchUserRepos: (username: string,user:Ref<GitUser | null>) => {
+    fetchUserRepos: (username: String,user:Ref<GitUser | null>) => {
          // if api token add header it not don't
         if(config.public.apiToken){
             const repoUrl = ref(`https://api.github.com/user/repos?access_token=${authToken}`)
