@@ -84,13 +84,13 @@
                     />
                 </div>   
             </div>
-            <div v-else-if="repoError">Unable to Find any Repositories</div>
+            <div v-else-if="repoError" class="p-4">Unable to Find any Repositories</div>
             <div v-else>
                 <LoadingRepoCard v-for="n in 10"/>
             </div>
         </ElementsProfileCard>
     </div>
-    <div v-else-if="userError">Unable to Find User</div>
+    <div v-else-if="userError" class="my-9">Unable to Find User</div>
     <div v-else><LoadingProfileCard/></div>
     
 </template>
