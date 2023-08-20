@@ -1,16 +1,24 @@
 <script setup lang="ts">
 
     const props = defineProps({
-        userName:String,
-        AuthToken:String,
+        userName:{
+            type:String,
+            default:null
+        },
+        authToken:{
+            type:String,
+            default:null
+        }
     })
+
+    console.log(props.authToken);
 
     // TODO: remove for debug only
     const showRawData = ref(false);
 
     // fetch data from Github
-    const {data: user, pending:pendingUser, error: userError} = githubApiService.fetchUserData(props.userName || "");
-    const {data: repos, pending: pendingRepo, error: repoError} = githubApiService.fetchUserRepos(props.userName || "",user);
+    const {data: user, pending:pendingUser, error: userError} = githubApiService.fetchUserData(props.userName, props.authToken);
+    const {data: repos, pending: pendingRepo, error: repoError} = githubApiService.fetchUserRepos(props.userName,user, props.authToken);
     
     
     const filteredRepos = ref();

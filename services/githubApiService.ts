@@ -1,11 +1,13 @@
 const config = useRuntimeConfig();
-const authToken = `bearer ${config.public.apiToken}`;
+
 export const githubApiService = {
 
-    fetchUserData: (username: String) => {
+    fetchUserData: (username: String,token:string) => {
+        console.log(token);
         const userUrl = ref(`https://api.github.com/users/${username}`)
+        const authToken = `bearer ${token? token : config.public.apiToken}`;
         // if api token add header it not don't
-        if(config.public.apiToken){
+        if(token || config.public.apiToken){
             const {data, pending, error} = useLazyFetch(userUrl.value,{
                 transform: (DataT) => DataT as GitUser,
                 headers: {
@@ -20,9 +22,11 @@ export const githubApiService = {
             return {data,pending,error};
         }
     },
-    fetchUserRepos: (username: String,user:Ref<GitUser | null>) => {
+    fetchUserRepos: (username: String,user:Ref<GitUser | null>,token:string) => {
+
+        const authToken = `bearer ${token? token : config.public.apiToken}`;
          // if api token add header it not don't
-        if(config.public.apiToken){
+        if(token || config.public.apiToken){
             const repoUrl = ref(`https://api.github.com/user/repos?access_token=${authToken}`)
             const {data, pending, error} = useLazyFetch(repoUrl.value,{
                 immediate:false,

@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen">
+    <div>
         <slot></slot>
     </div>
 </template>
