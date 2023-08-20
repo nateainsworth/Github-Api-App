@@ -18,7 +18,8 @@
                <ElementsButton v-if="props.blog"  :href="props.blog" :target="'_blank'" name="Blog"/>
                <ElementsButton :href="props.htmlLink" :target="'_blank'" name="View on Github" />
             </div>
-            <div class="flex mt-4 space-x-3 md:mt-6 bg-slate-100 w-full p-10">
+            <h3 class="text-2xl text-left w-full pl-9 mt-9">Repositories</h3>
+            <div class="mt-4 bg-slate-100 w-full p-10">
                 <slot></slot>
             </div>
         </div>

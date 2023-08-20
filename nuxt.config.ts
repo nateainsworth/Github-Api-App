@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     nojekyll: true,
   },
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss','@pinia/nuxt'],
+  modules: ['@nuxtjs/tailwindcss','@pinia/nuxt','dayjs-nuxt'],
   alias:{
     assets: "/<rootDir>/assets"
   },

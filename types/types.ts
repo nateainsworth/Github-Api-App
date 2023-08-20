@@ -16,6 +16,7 @@ declare global {
     updated_at: string;
     private: boolean;
     language: string | null;
+    visibility: string;
   }
 
 }

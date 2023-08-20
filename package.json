@@ -8,13 +8,14 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "nuxt generate && gh-pages -d .output/public"
+    "deploy": "nuxt generate && gh-pages --dotenv -d .output/public"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@types/node": "^18.17.3",
     "cypress": "^12.17.4",
+    "dayjs-nuxt": "^1.1.2",
     "gh-pages": "^6.0.0",
     "nuxt": "^3.6.5",
     "typescript": "^5.1.6"

@@ -24,6 +24,9 @@ devDependencies:
   cypress:
     specifier: ^12.17.4
     version: 12.17.4
+  dayjs-nuxt:
+    specifier: ^1.1.2
+    version: 1.1.2
   gh-pages:
     specifier: ^6.0.0
     version: 6.0.0
@@ -3082,6 +3085,16 @@ packages:
   /data-uri-to-buffer@4.0.1:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
     engines: {node: '>= 12'}
+    dev: true
+
+  /dayjs-nuxt@1.1.2:
+    resolution: {integrity: sha512-hYcAS7MLkfqU6lrUV12HUtckFE8OkqtIKIaII31zCTg+tH63DOy8yHat/TgkepgbjSmvYHH/uzXtub8oKYU5Gg==}
+    dependencies:
+      '@nuxt/kit': 3.6.5
+      dayjs: 1.11.9
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
     dev: true
 
   /dayjs@1.11.9:
