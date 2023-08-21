@@ -17,9 +17,9 @@
     }
 </script>
 <template>
-    <div class="w-full bg-white border border-slate-200 rounded-lg shadow my-4">
+    <div class="w-full bg-white border border-slate-200 rounded-lg shadow my-4 repo-card">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 p-2 ">
-            <div class=""> {{ props.name }}</div>
+            <div class="repo-title"> {{ props.name }}</div>
             <div class="flex md:justify-end">
                 <ElementsButton :href="props.htmlUrl" :target="'_blank'" name="View On Git"/>
             </div>

@@ -3,7 +3,6 @@ const config = useRuntimeConfig();
 export const githubApiService = {
 
     fetchUserData: (username: String,token:string) => {
-        console.log(token);
         const userUrl = ref(`https://api.github.com/users/${username}`)
         const authToken = `bearer ${token? token : config.public.apiToken}`;
         // if api token add header it not don't

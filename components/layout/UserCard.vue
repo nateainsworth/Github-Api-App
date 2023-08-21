@@ -11,10 +11,8 @@
         }
     })
 
-    console.log(props.authToken);
-
     // TODO: remove for debug only
-    const showRawData = ref(false);
+    //const showRawData = ref(false);
 
     // fetch data from Github
     const {data: user, pending:pendingUser, error: userError} = githubApiService.fetchUserData(props.userName, props.authToken);
@@ -73,7 +71,7 @@
         >
             <div v-if="!pendingRepo && !repoError">
                 <ElementsDropDown name="Filter" :list="Object.keys(filterCondition)" @change="filterRepos"></ElementsDropDown>
-                <div v-for="(index, key) in filteredRepos? filteredRepos : repos" :key="key" class="w-full">
+                <div v-for="(index, key) in filteredRepos? filteredRepos : repos" :key="key" class="w-full" id="repository-list">
                     <ElementsRepoCard 
                     :name="index?.name"
                     :description="index?.description"

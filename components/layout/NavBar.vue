@@ -50,7 +50,12 @@ const tokenValue = computed({
                     placeholder="Access Token" 
                     required>
                 </div>
-                <ElementsButton class="text-white w-12 radius-override items-center" @click="$emit('searchChange')"><IconsSearch class=" text-white h-6 w-6"/></ElementsButton>
+                <ElementsButton 
+                id="search-button"
+                class="text-white w-12 radius-override items-center" 
+                @click="$emit('searchChange')">
+                  <IconsSearch class=" text-white h-6 w-6"/>
+                </ElementsButton>
             </div>
         </div>
     </nav>
